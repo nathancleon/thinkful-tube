@@ -20,4 +20,12 @@
 
 img {
     margin: 10px 10px;
-};
+}
+
+.btn-prev {
+    display: none;
+}
+
+.btn-next {
+    display: none;
+}
