@@ -4,7 +4,6 @@ const YT_WATCH_URL = "https://www.youtube.com/watch?v=";
 
 
 function dataRequest(query) {
-    console.log('dataRequest() ran');
     //set parameters and ajax request, call displayResults() from within ajax request function
     let parameters = {
         part: 'id, snippet',
@@ -17,37 +16,29 @@ function dataRequest(query) {
 }
 
 function displayResults(results) {
-    console.log('displayResults() ran');
     //Appends data to js-results div in DOM
-    //use for each? to iterate through
+    //use for each to iterate through
     //store values for img ref and a ref
     //generate string literal with thumbnail img wrapped in a link (<a>)
     let resultsHTML = "";
     $.each(results, function(index, value){
-            console.log('displayResults() 2 ran');
             let thumbnailLink = YT_WATCH_URL + value.id.videoId;
             let thumbnailImg = value.snippet.thumbnails.default.url;
             let thumbnailAlt = value.snippet.title;
             resultsHTML += `<div class="js-thumbnail"><a href="${thumbnailLink}" role="link"><img src="${thumbnailImg}" title="${thumbnailAlt}"></a></div>`; 
-            console.log(thumbnailAlt)      
     });
     $('.js-results').html(resultsHTML); ;
 }
 
 function watchSubmit() {
-    console.log("watchSubmit() ran");
-    // $('.btn').on('click', function(event){
-    //     console.log('hellooooo');
-    // });
+    //triggers actions when submit button is clicked
+    //need text input value saved
+    //call ajax function
     $('#js-search-form').submit(function(event) {
-        console.log("watchSubmit2 ran");
         event.preventDefault();
         let query = $(event.currentTarget).find('input[name="search-query"]').val().trim();
         dataRequest(query);
     });
-    //triggers actions when submit button is clicked
-    //need text input value saved
-    //need to clear results each time submit button is clicked
 }
 
 $(function() {
