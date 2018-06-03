@@ -15,17 +15,19 @@
 <body>
     <main class="form-container" role="main">
         <h1>YouTube Search</h1>
-        <form id="js-search-form">
-            <input type="text" placeholder="Search" class="search-query js-search-query" name="search-query">
-            <button type="submit" class="btn btn-submit js-btn-submit">Submit</button>
+        <form id="js-search-form" role="form">
+            <label for="search-query">Search
+            <input type="text" placeholder="" class="search-query js-search-query" name="search-query">
+            </label>
+            <button type="submit" class="btn btn-submit js-btn-submit" role="button">Submit</button>
         </form>
     </main>
     <div class="results js-results">
 
     </div>
     <div class="results-pages">
-        <button type="button" class="btn btn-prev">Previous</button>
-        <button type="button" class="btn btn-next">Next</button>
+        <button type="button" class="btn btn-prev" role="button">Previous</button>
+        <button type="button" class="btn btn-next" role="button">Next</button>
     </div>
 </body>
 </html>
