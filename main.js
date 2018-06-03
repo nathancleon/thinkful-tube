@@ -16,7 +16,6 @@ function dataRequest(query, pageToken) {
         pageToken: pageToken,
     }
     $.getJSON(YT_SEARCH_URL, parameters, function(data){
-        console.log(data);
 
         //if data has nextPageToken, show the button and store value
         if(data.nextPageToken) {
@@ -27,6 +26,10 @@ function dataRequest(query, pageToken) {
         //if data has prevPageToken, show the button and store value
         if(data.prevPageToken) {
             $('.btn-prev').show();
+            prevPageToken = data.prevPageToken;
+            //if there is no previous token, hide the previous button
+        } else if (data.prevPageToken === undefined) {
+            $('.btn-prev').hide();
             prevPageToken = data.prevPageToken;
         }
         displayResults(data.items);
@@ -45,11 +48,11 @@ function displayResults(results) {
         let thumbnailLink = YT_WATCH_URL + value.id.videoId;
         let thumbnailImg = value.snippet.thumbnails.default.url;
         let thumbnailAlt = value.snippet.title;
-        resultsHTML += `<div class="js-thumbnail"><a href="${thumbnailLink}" 
-        role="link"><img src="${thumbnailImg}" 
-        title="${thumbnailAlt}"></a></div>`; 
+        resultsHTML += `<div class="js-thumbnail"><a href="${thumbnailLink}"
+        role="link"><img src="${thumbnailImg}"
+        title="${thumbnailAlt}"></a></div>`;
     });
-    $('.js-results').html(resultsHTML); ;
+    $('.js-results').html(resultsHTML);
 }
 
 function watchSubmit() {
@@ -64,11 +67,11 @@ function watchSubmit() {
     });
 
     //triggers dataRequest function when clicked
-    $('.btn-next').click(function(event) {
+    $('.btn-next').click(function() {
         dataRequest(QUERY, nextPageToken);
     });
 
-    $('.btn-prev').click(function(event) {
+    $('.btn-prev').click(function() {
         dataRequest(QUERY, prevPageToken);
     });
 }
